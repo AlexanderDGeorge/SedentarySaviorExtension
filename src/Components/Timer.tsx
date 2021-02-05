@@ -6,14 +6,15 @@ import { useEffect } from "react";
 export default function Timer(props: {
   minutes: number;
   running: boolean;
-  setRunning: Function;
+  toggleTimer: Function;
 }) {
-  const { minutes, running, setRunning } = props;
+  const { minutes, running, toggleTimer } = props;
   const initialSpring = {
     offset: 1533,
     config: {
       duration: minutes * 60000,
     },
+    // onRest: () => toggleTimer(),
   };
   const [spring, setSpring] = useSpring(() => initialSpring);
 
@@ -27,7 +28,8 @@ export default function Timer(props: {
     } else {
       setSpring({ offset: 3066 });
     }
-    setRunning((prev: boolean) => !prev);
+    toggleTimer();
+    // setRunning((prev: boolean) => !prev);
   };
 
   return (

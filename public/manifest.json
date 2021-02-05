@@ -13,7 +13,7 @@
   "background": {
     "scripts": ["background.ts"]
   },
-  "permissions": ["alarms", "notifications"],
+  "permissions": ["alarms", "notifications", "tabs"],
   "web_accessible_resources": ["/alarm.mp3"],
   "options_ui": {
     "page": "options.html",

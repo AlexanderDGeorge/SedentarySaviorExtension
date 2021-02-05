@@ -1,9 +1,8 @@
 import { useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import LogIn from "./Auth/LogIn";
-import useCurrentUser from "./Auth/useCurrentUser";
 import AnimatedLogo from "./Components/AnimatedLogo";
 import Timer from "./Components/Timer";
+import { pauseTimer, startTimer } from "./util/handleTimer";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -28,18 +27,33 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 export default function Application() {
-  const { user } = useCurrentUser();
-  const [minutes, setMinutes] = useState(10);
+  const [minutes, setMinutes] = useState(1);
   const [running, setRunning] = useState(false);
 
-  console.log(user);
+  const toggleTimer = () => {
+    if (running) {
+      setRunning(false);
+      pauseTimer();
+    } else {
+      setRunning(true);
+      startTimer(minutes * 60000);
+    }
+  };
 
   return (
     <>
       <GlobalStyle />
       <StyledApplication>
         <AnimatedLogo />
-        <Timer minutes={minutes} running={running} setRunning={setRunning} />
+        <input
+          type="number"
+          min={0}
+          max={120}
+          value={minutes}
+          onChange={(e) => setMinutes(parseInt(e.target.value))}
+          disabled={running}
+        />
+        <Timer minutes={minutes} running={running} toggleTimer={toggleTimer} />
       </StyledApplication>
     </>
   );
@@ -49,7 +63,6 @@ const StyledApplication = styled.div`
   position: relative;
   height: 568px;
   width: 320px;
-  border-radius: 40px;
   padding: 10px;
   background: #333;
   color: white;
