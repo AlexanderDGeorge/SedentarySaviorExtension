@@ -52,6 +52,7 @@ export default function Timer(props: {
 
 const StyledDial = styled.div`
   position: relative;
+  margin-top: 20px;
   height: 200px;
   width: 200px;
   border-radius: 50%;

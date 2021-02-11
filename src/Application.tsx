@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import AnimatedLogo from "./Components/AnimatedLogo";
+import TimeInput from "./Components/TimeInput";
 import Timer from "./Components/Timer";
 import { pauseTimer, startTimer } from "./util/handleTimer";
 
@@ -27,8 +28,20 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 export default function Application() {
-  const [minutes, setMinutes] = useState(1);
+  // const [loading, setLoading] = useState(true);
+  const [minutes, setMinutes] = useState(30);
   const [running, setRunning] = useState(false);
+
+  useEffect(() => {
+    // chrome.runtime.sendMessage(
+    //   "hfpnfacjdjffcdmlhiaeeggiamkhlhmg",
+    //   { type: "AWAKE" },
+    //   (response) => {
+    //     console.log(response);
+    //     // setLoading(false);
+    //   }
+    // );
+  }, []);
 
   const toggleTimer = () => {
     if (running) {
@@ -45,13 +58,10 @@ export default function Application() {
       <GlobalStyle />
       <StyledApplication>
         <AnimatedLogo />
-        <input
-          type="number"
-          min={0}
-          max={120}
-          value={minutes}
-          onChange={(e) => setMinutes(parseInt(e.target.value))}
-          disabled={running}
+        <TimeInput
+          minutes={minutes}
+          running={running}
+          setMinutes={setMinutes}
         />
         <Timer minutes={minutes} running={running} toggleTimer={toggleTimer} />
       </StyledApplication>
@@ -69,9 +79,6 @@ const StyledApplication = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  > * {
-    margin: 10px 0;
-  }
   > a {
     position: absolute;
     bottom: 20px;

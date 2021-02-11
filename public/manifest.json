@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "version": "0.1.0",
   "short_name": "SS",
   "name": "Sedentary Savior",
@@ -8,18 +8,20 @@
   "theme_color": "#ccff33",
   "background_color": "#333333",
   "icons": {
-    "512": "icon512.png"
+    "192": "icon192.png"
   },
   "background": {
-    "scripts": ["background.ts"]
+    "service_worker": "background.ts"
   },
   "permissions": ["alarms", "notifications", "tabs"],
-  "web_accessible_resources": ["/alarm.mp3"],
   "options_ui": {
     "page": "options.html",
     "open_in_tab": true
   },
   "browser_action": {
     "default_popup": "index.html"
+  },
+  "content_security_policy": {
+    "sandbox": "http://localhost:3000"
   }
 }

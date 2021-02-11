@@ -1,9 +1,14 @@
 export function startTimer(ms: number) {
-  chrome.runtime.sendMessage({ type: "START", ms });
+  chrome.runtime.sendMessage("hfpnfacjdjffcdmlhiaeeggiamkhlhmg", {
+    type: "START",
+    ms,
+  });
 }
 
 export function pauseTimer() {
-  chrome.runtime.sendMessage({ type: "PAUSE" });
+  chrome.runtime.sendMessage("hfpnfacjdjffcdmlhiaeeggiamkhlhmg", {
+    type: "PAUSE",
+  });
 }
 
 export function resetTimer() {}

@@ -15,5 +15,6 @@ const hover = keyframes`
 `;
 
 const StyledLogo = styled.img`
+  margin-bottom: 20px;
   animation: ${hover} 2s ease-in-out infinite alternate-reverse;
 `;
